@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -97,7 +96,7 @@ public class MainActivityFragment extends BaseFragment {
         mListAdapter = new CitiesListAdapter(mCitiesData, new CitiesListAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(City cityItem) {
-                Log.d(TAG, "onItemClick() called with: cityItem = [" + cityItem + "]");
+                mainActivity.addFragment(MapFragment.newInstance(cityItem.getCoord()), "map_fragment");
             }
         });
         mCitiesRV.setAdapter(mListAdapter);

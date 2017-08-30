@@ -14,7 +14,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import me.tatocaster.bbtest.R;
-import me.tatocaster.bbtest.model.Coord;
+import me.tatocaster.bbtest.model.Coordinate;
 
 /**
  * Created by tatocaster on 8/30/17.
@@ -24,7 +24,7 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback {
     private static final String TAG = "MapFragment";
     private static final String BUNDLE_SERIALIZABLE_OBJECT_KEY = "BUNDLE_SERIALIZABLE_OBJECT_KEY";
     private GoogleMap mGoogleMap;
-    private Coord mSelectedCoordinates;
+    private Coordinate mSelectedCoordinates;
 
     public MapFragment() {
 
@@ -36,7 +36,7 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback {
 
         Bundle bundle = getArguments();
         if (bundle != null)
-            mSelectedCoordinates = (Coord) bundle.getSerializable(BUNDLE_SERIALIZABLE_OBJECT_KEY);
+            mSelectedCoordinates = (Coordinate) bundle.getSerializable(BUNDLE_SERIALIZABLE_OBJECT_KEY);
     }
 
     @Nullable
@@ -62,13 +62,13 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback {
 
     private void gotoLocation() {
         if (mGoogleMap != null) {
-            LatLng pos = new LatLng(mSelectedCoordinates.getLat(), mSelectedCoordinates.getLon());
+            LatLng pos = new LatLng(mSelectedCoordinates.lat, mSelectedCoordinates.lon);
             mGoogleMap.addMarker(new MarkerOptions().position(pos));
             mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(pos, 15f));
         }
     }
 
-    public static MapFragment newInstance(Coord coordinates) {
+    public static MapFragment newInstance(Coordinate coordinates) {
         MapFragment f = new MapFragment();
         Bundle args = new Bundle();
         args.putSerializable(BUNDLE_SERIALIZABLE_OBJECT_KEY, coordinates);

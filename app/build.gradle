@@ -27,7 +27,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support:recyclerview-v7:26.+'
     compile 'com.android.support:design:26.+'
-    compile 'com.google.code.gson:gson:2.8.1'
+    compile 'com.github.FasterXML:jackson-databind:2.2.0c'
     compile 'com.google.android.gms:play-services-maps:11.0.4'
     testCompile 'junit:junit:4.12'
 }

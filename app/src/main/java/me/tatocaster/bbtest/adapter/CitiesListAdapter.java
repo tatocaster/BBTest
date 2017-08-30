@@ -39,7 +39,7 @@ public class CitiesListAdapter extends RecyclerView.Adapter<CitiesListAdapter.Vi
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         City item = mListData.get(position);
-        holder.setCityName(String.format(Locale.getDefault(), "%s, %s", item.getName(), item.getCountry()));
+        holder.setCityName(String.format(Locale.getDefault(), "%s, %s", item.name, item.country));
         holder.setClickListener(item, mListener);
     }
 

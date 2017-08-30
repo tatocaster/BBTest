@@ -2,7 +2,6 @@ package me.tatocaster.bbtest.ui;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -10,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -23,15 +23,17 @@ import java.util.List;
 import me.tatocaster.bbtest.R;
 import me.tatocaster.bbtest.adapter.CitiesListAdapter;
 import me.tatocaster.bbtest.model.City;
+import me.tatocaster.bbtest.util.EmptyRecyclerView;
 import me.tatocaster.bbtest.util.Utils;
 
 public class MainActivityFragment extends BaseFragment {
 
     private static final String TAG = "MainActivityFragment";
-    private RecyclerView mCitiesRV;
+    private EmptyRecyclerView mCitiesRV;
     private EditText mInputSearch;
     private CitiesListAdapter mListAdapter;
     private List<City> mCitiesData = new ArrayList<>();
+    private LinearLayout mEmptyView;
 
     public MainActivityFragment() {
     }
@@ -88,6 +90,7 @@ public class MainActivityFragment extends BaseFragment {
     private void findViewsById(View rootView) {
         mCitiesRV = rootView.findViewById(R.id.citiesList);
         mInputSearch = rootView.findViewById(R.id.inputSearch);
+        mEmptyView = rootView.findViewById(R.id.emptyView);
     }
 
     private void setUpRecyclerView() {
@@ -99,5 +102,6 @@ public class MainActivityFragment extends BaseFragment {
         });
         mCitiesRV.setAdapter(mListAdapter);
         mCitiesRV.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mCitiesRV.setEmptyView(mEmptyView);
     }
 }

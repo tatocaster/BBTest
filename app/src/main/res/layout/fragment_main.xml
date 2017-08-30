@@ -14,9 +14,24 @@
         android:hint="@string/search_cities" />
 
 
-    <android.support.v7.widget.RecyclerView
+    <me.tatocaster.bbtest.util.EmptyRecyclerView
         android:id="@+id/citiesList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/vertical_margin" />
+
+    <LinearLayout
+        android:id="@+id/emptyView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <ProgressBar
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
+            android:indeterminate="true" />
+
+    </LinearLayout>
 </LinearLayout>

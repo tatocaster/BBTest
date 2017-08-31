@@ -70,7 +70,7 @@ public class MainActivityFragment extends BaseFragment {
                     mLoadingData.setVisibility(View.INVISIBLE);
                 } else {
                     mSearchTask = new SearchTask();
-                    mSearchTask.execute(s.toString().toLowerCase());
+                    mSearchTask.execute(s.toString());
                 }
             }
         });
@@ -129,7 +129,7 @@ public class MainActivityFragment extends BaseFragment {
         int n = data.size();
         int first = -1, last = -1;
         for (int i = 0; i < n; i++) {
-            if (!data.get(i).name.toLowerCase().startsWith(searchTerm))
+            if (!data.get(i).name.toLowerCase().startsWith(searchTerm.toLowerCase()))
                 continue;
             if (first == -1)
                 first = i;

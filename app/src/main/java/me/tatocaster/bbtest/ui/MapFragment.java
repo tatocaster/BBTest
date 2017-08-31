@@ -64,7 +64,7 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback {
         if (mGoogleMap != null) {
             LatLng pos = new LatLng(mSelectedCoordinates.lat, mSelectedCoordinates.lon);
             mGoogleMap.addMarker(new MarkerOptions().position(pos));
-            mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(pos, 15f));
+            mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(pos, 11f));
         }
     }
 

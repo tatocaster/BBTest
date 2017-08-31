@@ -1,12 +1,10 @@
 package me.tatocaster.bbtest.model;
 
-import android.support.annotation.NonNull;
-
 /**
  * Created by tatocaster on 8/30/17.
  */
 
-public class City implements Comparable<String> {
+public class City {
     public String country;
     public String name;
     public int _id;
@@ -20,10 +18,5 @@ public class City implements Comparable<String> {
                 ", _id='" + _id + '\'' +
                 ", coord=" + coord +
                 '}';
-    }
-
-    @Override
-    public int compareTo(@NonNull String s) {
-        return name.toLowerCase().startsWith(s.toLowerCase()) ? 0 : -1;
     }
 }

@@ -7,12 +7,26 @@
     android:orientation="vertical"
     tools:context=".ui.MainActivity">
 
-    <EditText
-        android:id="@+id/inputSearch"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/search_cities" />
+        android:weightSum="1">
 
+        <EditText
+            android:id="@+id/inputSearch"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="0.8"
+            android:hint="@string/search_cities" />
+
+        <ProgressBar
+            android:id="@+id/loading"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="0.2"
+            android:indeterminate="true"
+            android:visibility="invisible" />
+    </LinearLayout>
 
     <me.tatocaster.bbtest.util.EmptyRecyclerView
         android:id="@+id/citiesList"

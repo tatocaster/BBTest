@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,14 +64,14 @@ public class MainActivityFragment extends BaseFragment {
                 mLoadingData.setVisibility(View.VISIBLE);
                 // stop any current search thread
                 if (mSearchTask != null && !mSearchTask.isCancelled()) {
-                    mSearchTask.cancel(false);
+                    mSearchTask.cancel(true);
                 }
                 if (s.length() == 0) {
                     mListAdapter.updateData(mDisplayData);
                     mLoadingData.setVisibility(View.INVISIBLE);
                 } else {
                     mSearchTask = new SearchTask();
-                    mSearchTask.execute(s.toString());
+                    mSearchTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, s.toString());
                 }
             }
         });
@@ -102,6 +103,11 @@ public class MainActivityFragment extends BaseFragment {
     private class SearchTask extends AsyncTask<String, City, List<City>> {
         protected List<City> doInBackground(String... params) {
             List<City> temp = new ArrayList<>();
+
+            if (isCancelled()) {
+                return temp;
+            }
+
             if (params.length == 0) {
                 return temp;
             }
@@ -131,6 +137,8 @@ public class MainActivityFragment extends BaseFragment {
         for (int i = 0; i < n; i++) {
             if (!data.get(i).name.toLowerCase().startsWith(searchTerm.toLowerCase()))
                 continue;
+
+            Log.d(TAG, String.valueOf(i));
             if (first == -1)
                 first = i;
             last = i;

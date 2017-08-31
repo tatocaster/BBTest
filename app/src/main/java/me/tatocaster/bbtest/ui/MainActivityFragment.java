@@ -103,18 +103,7 @@ public class MainActivityFragment extends BaseFragment {
             }
             String searchTerm = params[0];
 
-            // we search for the first and the last occurrences in the list and then sublist it.
-            int n = mCitiesData.size();
-            int first = -1, last = -1;
-            for (int i = 0; i < n; i++) {
-                if (!mCitiesData.get(i).name.toLowerCase().startsWith(searchTerm))
-                    continue;
-                if (first == -1)
-                    first = i;
-                last = i;
-            }
-            if (first != -1)
-                temp.addAll(mCitiesData.subList(first, last + 1));
+            temp.addAll(search(mCitiesData, searchTerm));
 
             return temp;
         }
@@ -123,5 +112,27 @@ public class MainActivityFragment extends BaseFragment {
             mListAdapter.updateData(list);
             mLoadingData.setVisibility(View.INVISIBLE);
         }
+    }
+
+    /**
+     * find the first and last occurrences in the list of the search term
+     *
+     * @param data
+     * @param searchTerm
+     * @return List
+     */
+    public List<City> search(List<City> data, String searchTerm) {
+        int n = data.size();
+        int first = -1, last = -1;
+        for (int i = 0; i < n; i++) {
+            if (!data.get(i).name.toLowerCase().startsWith(searchTerm))
+                continue;
+            if (first == -1)
+                first = i;
+            last = i;
+        }
+        if (first != -1)
+            return data.subList(first, last + 1);
+        return new ArrayList<>();
     }
 }

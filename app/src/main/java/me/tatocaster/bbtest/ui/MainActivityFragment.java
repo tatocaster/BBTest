@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +13,13 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import me.tatocaster.bbtest.R;
 import me.tatocaster.bbtest.adapter.CitiesListAdapter;
 import me.tatocaster.bbtest.model.City;
+import me.tatocaster.bbtest.util.CitiesSearchComparator;
 import me.tatocaster.bbtest.util.EmptyRecyclerView;
 
 public class MainActivityFragment extends BaseFragment {
@@ -96,9 +99,33 @@ public class MainActivityFragment extends BaseFragment {
                 return temp;
             }
             List<City> dataForFilter = new ArrayList<>(mCitiesData);
-            for (City item : dataForFilter) {
-                if (item.name.toLowerCase().startsWith(params[0])) {
-                    temp.add(item);
+
+            /*
+            first of all we need binary search to optimize whole search functionality
+            using binary search we get first exact matching string index, and then iterate over list
+            to find the next matching strings, until it will not match anymore
+             */
+            City city = new City();
+            city.name = params[0];
+            int startFrom = Collections.binarySearch(dataForFilter, city, new CitiesSearchComparator());
+
+            boolean matchedSuffix = false;
+            if (startFrom < 0) {
+                Log.d(TAG, "no data found");
+            } else {
+                for (int i = startFrom; i < dataForFilter.size(); i++) {
+                    String s = dataForFilter.get(i).name.toLowerCase();
+                    if (s.startsWith(params[0].toLowerCase())) {
+                        //here you will get matching strings
+                        Log.d(TAG, "matching string " + s);
+                        matchedSuffix = true;
+                        temp.add(dataForFilter.get(i));
+                    } else {
+                        if (matchedSuffix) {
+                            break;
+                        }
+                    }
+
                 }
             }
             return temp;

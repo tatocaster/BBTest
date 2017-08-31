@@ -27,11 +27,11 @@
         android:layout_gravity="center"
         android:orientation="vertical">
 
-        <ProgressBar
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_gravity="center"
-            android:indeterminate="true" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/no_results" />
 
     </LinearLayout>
 </LinearLayout>

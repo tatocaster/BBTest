@@ -9,7 +9,7 @@ import android.support.annotation.NonNull;
 public class City implements Comparable<String> {
     public String country;
     public String name;
-    public String _id;
+    public int _id;
     public Coordinate coord;
 
     @Override
@@ -24,6 +24,6 @@ public class City implements Comparable<String> {
 
     @Override
     public int compareTo(@NonNull String s) {
-        return name.startsWith(s.toLowerCase()) ? 0 : name.compareToIgnoreCase(s);
+        return name.toLowerCase().startsWith(s.toLowerCase()) ? 0 : -1;
     }
 }

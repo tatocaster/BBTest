@@ -1,5 +1,6 @@
 package me.tatocaster.bbtest.ui;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,6 +9,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -87,6 +89,8 @@ public class MainActivityFragment extends BaseFragment {
         mListAdapter = new CitiesListAdapter(mDisplayData, new CitiesListAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(City cityItem) {
+                InputMethodManager imm = (InputMethodManager) mainActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
                 mainActivity.addFragment(MapFragment.newInstance(cityItem.coord), "map_fragment");
             }
         });
